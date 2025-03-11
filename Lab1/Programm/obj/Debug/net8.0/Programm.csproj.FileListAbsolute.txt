@@ -1,0 +1,14 @@
+D:\Learning\4_sem_(2 course)\OOP\Lab1\Programm\bin\Debug\net8.0\Programm.exe
+D:\Learning\4_sem_(2 course)\OOP\Lab1\Programm\bin\Debug\net8.0\Programm.deps.json
+D:\Learning\4_sem_(2 course)\OOP\Lab1\Programm\bin\Debug\net8.0\Programm.runtimeconfig.json
+D:\Learning\4_sem_(2 course)\OOP\Lab1\Programm\bin\Debug\net8.0\Programm.dll
+D:\Learning\4_sem_(2 course)\OOP\Lab1\Programm\bin\Debug\net8.0\Programm.pdb
+D:\Learning\4_sem_(2 course)\OOP\Lab1\Programm\obj\Debug\net8.0\Programm.GeneratedMSBuildEditorConfig.editorconfig
+D:\Learning\4_sem_(2 course)\OOP\Lab1\Programm\obj\Debug\net8.0\Programm.AssemblyInfoInputs.cache
+D:\Learning\4_sem_(2 course)\OOP\Lab1\Programm\obj\Debug\net8.0\Programm.AssemblyInfo.cs
+D:\Learning\4_sem_(2 course)\OOP\Lab1\Programm\obj\Debug\net8.0\Programm.csproj.CoreCompileInputs.cache
+D:\Learning\4_sem_(2 course)\OOP\Lab1\Programm\obj\Debug\net8.0\Programm.dll
+D:\Learning\4_sem_(2 course)\OOP\Lab1\Programm\obj\Debug\net8.0\refint\Programm.dll
+D:\Learning\4_sem_(2 course)\OOP\Lab1\Programm\obj\Debug\net8.0\Programm.pdb
+D:\Learning\4_sem_(2 course)\OOP\Lab1\Programm\obj\Debug\net8.0\Programm.genruntimeconfig.cache
+D:\Learning\4_sem_(2 course)\OOP\Lab1\Programm\obj\Debug\net8.0\ref\Programm.dll
