@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "iwlELt9qItM=",
+  "dgSpecHash": "K8lEwi6UI8w=",
   "success": true,
-  "projectFilePath": "D:\\Learning\\4_sem_(2 course)\\OOP\\Lab1\\Tests\\Tests.csproj",
+  "projectFilePath": "D:\\Learning\\4_sem_(2 course)\\OOP\\githubrep\\Lab1\\Tests\\Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\genos\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
     "C:\\Users\\genos\\.nuget\\packages\\microsoft.codecoverage\\17.8.0\\microsoft.codecoverage.17.8.0.nupkg.sha512",

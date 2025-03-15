@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Droweroid.Drawer">
+    <Position X="16" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAgAAAAAAQIAAAAAAAAAAAAAAABIAAAEAAA=</HashCode>
+      <FileName>DrawClasses.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Canvas" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Droweroid.Filler">
+    <Position X="16" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DrawClasses.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Droweroid.Figure">
+    <Position X="11" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAEQSCIAAAAAEAABgAAAAAAA=</HashCode>
+      <FileName>DrawClasses.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Droweroid.Ellipse">
+    <Position X="9.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAEQSGIAAAAAEAABgAAAAAAA=</HashCode>
+      <FileName>DrawClasses.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Droweroid.Rectangle">
+    <Position X="7.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAEQSCIAAAAAEAABgAAAAAAA=</HashCode>
+      <FileName>DrawClasses.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Droweroid.Triangle">
+    <Position X="5.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAABAAAAEAAAAAAAEYSCIAAAAAEAABgAAAAAAA=</HashCode>
+      <FileName>DrawClasses.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Droweroid.Canvas">
+    <Position X="13.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAQAgIAABAAAEAAAAAAAAEEACIAAABAAQAgAAAAAAAA=</HashCode>
+      <FileName>DrawClasses.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Figures" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

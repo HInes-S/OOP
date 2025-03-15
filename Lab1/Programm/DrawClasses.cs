@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Formats.Asn1;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -211,6 +212,76 @@ namespace Droweroid
                                 break;
                         }
                     }
+                    else if (cnt == 12)
+                    {
+                        if (Canvas.Figures.Find(f => f != null && f.Name == keyWords[2]) != null)
+                        {
+                            error = "Error: Figure with this Name already exists";
+                            break;
+                        }
+
+                        if (keyWords[2] == "")
+                        {
+                            error = "Error: Wrong Name";
+                            break;
+                        }
+
+                        if (!int.TryParse(keyWords[3], out var tempX1) ||
+                            !int.TryParse(keyWords[4], out var tempY1) ||
+                            !int.TryParse(keyWords[5], out var tempX2) ||
+                            !int.TryParse(keyWords[6], out var tempY2) ||
+                            !int.TryParse(keyWords[7], out var tempX3) ||
+                            !int.TryParse(keyWords[8], out var tempY3))
+                        {
+                            error = "Error: Wrong Coordinates";
+                            break;
+                        }
+                        else if (tempX1 < 0 || tempY1 < 0 || tempX2 < 0 || tempY2 < 0 || tempX3 < 0 || tempY3 < 0)
+                        {
+                            error = "Error: Wrong Coordinates";
+                            break;
+                        }
+
+                        //border, background, layer
+                        if (!char.TryParse(keyWords[9], out var tempBorder) && keyWords[9] != "empty" && keyWords[9] != "space")
+                        {
+                            error = "Error: Wrong BorderColor";
+                            break;
+                        }
+
+                        if (!char.TryParse(keyWords[10], out var tempBackgound) && keyWords[10] != "empty" && keyWords[10] != "space")
+                        {
+                            error = "Error: Wrong BackgroundColor";
+                            break;
+                        }
+
+                        if (!int.TryParse(keyWords[11], out var tempLayer))
+                        {
+                            error = "Error: Wrong Layer";
+                            break;
+                        }
+
+                        if (keyWords[9] == "empty")
+                            tempBorder = '\n';
+                        if (keyWords[10] == "empty")
+                            tempBackgound = '\n';
+                        if (keyWords[9] == "space")
+                            tempBorder = ' ';
+                        if (keyWords[10] == "space")
+                            tempBackgound = ' ';
+
+                        if (keyWords[1] == "triangle")
+                        {
+                            Canvas.Figures.Add(new Triangle((tempX1, tempY1, tempX2, tempY2, tempX3, tempY3), 
+                                               tempBorder, tempBackgound, tempLayer, keyWords[2]));
+                            Canvas.Update(Canvas.Figures);
+                            change = true;
+                        }
+                        else
+                        {
+                            error = "Error: Wrong figure type";
+                        }
+                    }
                     else
                         error = "Error: Wrong count of arguments";
                     break;
@@ -262,7 +333,16 @@ namespace Droweroid
                                 if (cnt == 2)
                                 {
                                     error = $"{tempf.Name}: pos({tempf.x}, {tempf.y}), size({tempf.Width}, {tempf.Height}), layer({tempf.Layer})," +
-                                            $" borderColor({tempf.BorderColor}), bgColor({tempf.BackgroundColor}), type({tempf.GetType})";
+                                            $" borderColor({tempf.BorderColor}), bgColor({tempf.BackgroundColor}), type(";
+
+                                    if (tempf.GetType() == typeof(Ellipse))
+                                        error = error + "ellipse)";
+                                    else if (tempf.GetType() == typeof(Rectangle))
+                                        error = error + "rectangle)";
+                                    else if (tempf.GetType() == typeof(Triangle))
+                                        error = error + "triangle)";
+                                    else
+                                        error = error + "unknown)";
                                 }
                                 else
                                 {
@@ -352,7 +432,12 @@ namespace Droweroid
                                         case "size":
                                             if (cnt == 5)
                                             {
-                                                if (int.TryParse(keyWords[3], out var tempw) && int.TryParse(keyWords[4], out var temph))
+                                                if (keyWords[2].GetType() == typeof(Triangle))
+                                                {
+                                                    error = "Error: Can not change size of triangle";
+                                                    break;
+                                                }
+                                                else if (int.TryParse(keyWords[3], out var tempw) && int.TryParse(keyWords[4], out var temph))
                                                 {
                                                     if (tempw > 0 && tempw + tempf.x <= Canvas.Width &&
                                                        temph > 0 && temph + tempf.y <= Canvas.Height)
@@ -440,7 +525,9 @@ namespace Droweroid
                         switch (keyWords[1])
                         {
                             case "draw":
-                                error = "draw <figure> <Name> <x> <y> <w> <h> <BorderColor> <BackgroundColor> <Layer>";
+                                error = "draw elipse <Name> <x> <y> <w> <h> <BorderColor> <BackgroundColor> <Layer>\n" +
+                                        "draw rect <Name> <x> <y> <w> <h> <BorderColor> <BackgroundColor> <Layer>\n" +
+                                        "draw triangle <Name> <x1> <y1> <x2> <y2> <x3> <y3> <BorderColor> <BackgroundColor> <Layer>";
                                 break;
 
                             case "clear":
@@ -637,7 +724,7 @@ namespace Droweroid
         public abstract char BackgroundColor { get; set; }
         public abstract int Layer { get; set; }
         public abstract string Name { get; set; }
-        public abstract char[,] GetImage();
+        public virtual char[,] GetImage() { return new char[0, 0]; }
         public abstract Figure DeepClone();
         
     }
@@ -858,9 +945,177 @@ namespace Droweroid
             return ans;
         }
     }
+    public class Triangle : Figure
+    {
+        public override int x { get; set; }
+        public override int y { get; set; }
+        public override int Width { get; set; }
+        public override int Height { get; set; }
+        public override char BorderColor { get; set; }
+        public override char BackgroundColor { get; set; }
+        public override int Layer { get; set; }
+        public override string Name { get; set; }
+        public (int, int, int, int, int, int) Cords { get; set; }
+
+        public Triangle()
+        {
+            x = 0;
+            y = 0;
+            Width = 0;
+            Height = 0;
+            Cords = (0, 0, 0, 0, 0, 0);
+            BorderColor = ' ';
+            BackgroundColor = ' ';
+            Layer = 0;
+            Name = "";
+        }
+
+        public Triangle((int, int, int, int, int, int) cords, char borderColor, char backgroundColor, int layer, string name)
+        {
+            this.x = Math.Min(cords.Item1, Math.Min(cords.Item3, cords.Item5));
+            this.y = Math.Min(cords.Item2, Math.Min(cords.Item4, cords.Item6));
+            Width = Math.Max(cords.Item1, Math.Max(cords.Item3, cords.Item5)) - x + 1;
+            Height = Math.Max(cords.Item2, Math.Max(cords.Item4, cords.Item6)) - y + 1;
+            Cords = cords;
+            BorderColor = borderColor;
+            BackgroundColor = backgroundColor;
+            Layer = layer;
+            Name = name;
+        }
+
+        public override Figure DeepClone()
+        {
+            return new Triangle
+            {
+                x = this.x,
+                y = this.y,
+                Width = this.Width,
+                Height = this.Height,
+                BackgroundColor = this.BackgroundColor,
+                BorderColor = this.BorderColor,
+                Layer = this.Layer,
+                Name = this.Name,
+                Cords = this.Cords
+            };
+        }
+
+        static List<(int, int)> GetLine(int x1, int y1, int x2, int y2)
+        {
+            var ans = new List<(int, int)>();
+
+            var steep = Math.Abs(y2 - y1) > Math.Abs(x2 - x1);
+            if (steep)
+            {
+                int temp = x1; x1 = y1; y1 = temp;
+                temp = x2; x2 = y2; y2 = temp;
+            }
+
+            bool switched = false;
+            if (x1 > x2)
+            {
+                switched = true;
+                int temp = x1; x1 = x2; x2 = temp;
+                temp = y1; y1 = y2; y2 = temp;
+            }
+
+            int ystep;
+            if (y1 < y2)
+                ystep = 1;
+            else
+                ystep = -1;
+
+            int deltax = x2 - x1, deltay = Math.Abs(y2 - y1), error = -deltax / 2, y = y1;
+
+            for (int x = x1; (x2 > x1 ? x <= x2 : x >= x2); x += x2 > x1 ? 1 : -1)
+            {
+                if (steep)
+                    ans.Add((y, x));
+                else
+                    ans.Add((x, y));
+
+                error += deltay;
+                if (error > 0)
+                {
+                    y += ystep;
+                    error -= deltax;
+                }
+            }
+
+            if (switched)
+                ans.Reverse();
+
+            return ans;
+        }
+
+        private int[,] GetBorder()
+        {
+            int x1 = Cords.Item1, x2 = Cords.Item3, x3 = Cords.Item5,
+                y1 = Cords.Item2, y2 = Cords.Item4, y3 = Cords.Item6;
+
+            if (x1 < 0 || x2 < 0 || x3 < 0 || y1 < 0 || y2 < 0 || y3 < 0)
+                throw new Exception("Triangle negative point coordinates");
+
+            int minx = Math.Min(x1, Math.Min(x2, x3)), miny = Math.Min(y1, Math.Min(y2, y3));
+
+            x1 -= minx; x2 -= minx; x3 -= minx;
+            y1 -= miny; y2 -= miny; y3 -= miny;
+
+            var ans = new int[Math.Abs(Math.Min(x1, Math.Min(x2, x3)) - Math.Max(x1, Math.Max(x2, x3))) + 1,
+                              Math.Abs(Math.Min(y1, Math.Min(y2, y3)) - Math.Max(y1, Math.Max(y2, y3))) + 1];
+
+            var line = GetLine(x1, y1, x2, y2);
+            foreach (var p in line)
+                ans[p.Item1, p.Item2] = 1;
+
+            line = GetLine(x3, y3, x2, y2);
+            foreach (var p in line)
+                ans[p.Item1, p.Item2] = 1;
+
+            line = GetLine(x1, y1, x3, y3);
+            foreach (var p in line)
+                ans[p.Item1, p.Item2] = 1;
+
+            return ans;
+        }
+
+        public override char[,] GetImage()
+        {
+            var ansi = GetBorder();
+
+            var ansiw = ansi.GetLength(0);
+            var ansih = ansi.GetLength(1);
+
+            if (ansi[0, 0] == 0)
+                ansi = Filler.Fill(ansi, 0, 0, 3);
+            if (ansi[0, ansih - 1] == 0)
+                ansi = Filler.Fill(ansi, 0, ansih - 1, 3);
+            if (ansi[ansiw - 1, 0] == 0)
+                ansi = Filler.Fill(ansi, ansiw - 1, 0, 3);
+            if (ansi[ansiw - 1, ansih - 1] == 0)
+                ansi = Filler.Fill(ansi, ansiw - 1, ansih - 1, 3);
+
+            var ans = new char[ansiw, ansih];
+
+            for(int i = 0; i < ansiw; i++)
+            {
+                for(int j = 0; j < ansih; j++)
+                {
+                    if (ansi[i, j] == 1)
+                        ans[i, j] = BorderColor;
+                    else if (ansi[i, j] == 0)
+                        ans[i, j] = BackgroundColor;
+                    else
+                        ans[i, j] = '\n';
+                }
+            }
+
+            return ans;
+        }
+    }
 
     [XmlInclude(typeof(Ellipse))]
     [XmlInclude(typeof(Rectangle))]
+    [XmlInclude(typeof(Triangle))]
     public class Canvas
     {
         public int Width { get; set; }

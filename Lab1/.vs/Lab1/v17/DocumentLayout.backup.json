@@ -1,17 +1,17 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Learning\\4_sem_(2 course)\\OOP\\Lab1\\",
+  "WorkspaceRootPath": "D:\\Learning\\4_sem_(2 course)\\OOP\\githubrep\\Lab1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FC7388E9-4406-410D-86C1-14EFF914DF30}|Tests\\Tests.csproj|d:\\learning\\4_sem_(2 course)\\oop\\lab1\\tests\\drowertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FC7388E9-4406-410D-86C1-14EFF914DF30}|Tests\\Tests.csproj|solutionrelative:tests\\drowertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BB73C2C3-5EB2-4D9F-BE9D-51E6C3F17D06}|Programm\\Programm.csproj|d:\\learning\\4_sem_(2 course)\\oop\\lab1\\programm\\drawclasses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{BB73C2C3-5EB2-4D9F-BE9D-51E6C3F17D06}|Programm\\Programm.csproj|d:\\learning\\4_sem_(2 course)\\oop\\githubrep\\lab1\\programm\\drawclasses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BB73C2C3-5EB2-4D9F-BE9D-51E6C3F17D06}|Programm\\Programm.csproj|solutionrelative:programm\\drawclasses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BB73C2C3-5EB2-4D9F-BE9D-51E6C3F17D06}|Programm\\Programm.csproj|d:\\learning\\4_sem_(2 course)\\oop\\lab1\\programm\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{FC7388E9-4406-410D-86C1-14EFF914DF30}|Tests\\Tests.csproj|d:\\learning\\4_sem_(2 course)\\oop\\githubrep\\lab1\\tests\\drowertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FC7388E9-4406-410D-86C1-14EFF914DF30}|Tests\\Tests.csproj|solutionrelative:tests\\drowertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB73C2C3-5EB2-4D9F-BE9D-51E6C3F17D06}|Programm\\Programm.csproj|d:\\learning\\4_sem_(2 course)\\oop\\githubrep\\lab1\\programm\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BB73C2C3-5EB2-4D9F-BE9D-51E6C3F17D06}|Programm\\Programm.csproj|solutionrelative:programm\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -22,35 +22,31 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "DrawClasses.cs",
-              "DocumentMoniker": "D:\\Learning\\4_sem_(2 course)\\OOP\\Lab1\\Programm\\DrawClasses.cs",
+              "DocumentMoniker": "D:\\Learning\\4_sem_(2 course)\\OOP\\githubrep\\Lab1\\Programm\\DrawClasses.cs",
               "RelativeDocumentMoniker": "Programm\\DrawClasses.cs",
-              "ToolTip": "D:\\Learning\\4_sem_(2 course)\\OOP\\Lab1\\Programm\\DrawClasses.cs",
+              "ToolTip": "D:\\Learning\\4_sem_(2 course)\\OOP\\githubrep\\Lab1\\Programm\\DrawClasses.cs",
               "RelativeToolTip": "Programm\\DrawClasses.cs",
-              "ViewState": "AgIAACsCAAAAAAAAAAAzwMMDAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFgBAABDAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-04T06:15:51.601Z",
               "IsPinned": true,
               "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "DrowerTests.cs",
-              "DocumentMoniker": "D:\\Learning\\4_sem_(2 course)\\OOP\\Lab1\\Tests\\DrowerTests.cs",
+              "DocumentMoniker": "D:\\Learning\\4_sem_(2 course)\\OOP\\githubrep\\Lab1\\Tests\\DrowerTests.cs",
               "RelativeDocumentMoniker": "Tests\\DrowerTests.cs",
-              "ToolTip": "D:\\Learning\\4_sem_(2 course)\\OOP\\Lab1\\Tests\\DrowerTests.cs",
+              "ToolTip": "D:\\Learning\\4_sem_(2 course)\\OOP\\githubrep\\Lab1\\Tests\\DrowerTests.cs",
               "RelativeToolTip": "Tests\\DrowerTests.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAABhAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-11T12:39:39.424Z",
               "EditorCaption": ""
@@ -59,11 +55,11 @@
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Learning\\4_sem_(2 course)\\OOP\\Lab1\\Programm\\Program.cs",
+              "DocumentMoniker": "D:\\Learning\\4_sem_(2 course)\\OOP\\githubrep\\Lab1\\Programm\\Program.cs",
               "RelativeDocumentMoniker": "Programm\\Program.cs",
-              "ToolTip": "D:\\Learning\\4_sem_(2 course)\\OOP\\Lab1\\Programm\\Program.cs",
+              "ToolTip": "D:\\Learning\\4_sem_(2 course)\\OOP\\githubrep\\Lab1\\Programm\\Program.cs",
               "RelativeToolTip": "Programm\\Program.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAADgvywAAABXAAAAAAAAAA==",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAAAkAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-04T06:03:31.306Z",
               "EditorCaption": ""

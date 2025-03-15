@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Learning\\4_sem_(2 course)\\OOP\\Lab1\\Programm\\Programm.csproj",
+      "projectUniqueName": "D:\\Learning\\4_sem_(2 course)\\OOP\\githubrep\\Lab1\\Programm\\Programm.csproj",
       "projectName": "Programm",
-      "projectPath": "D:\\Learning\\4_sem_(2 course)\\OOP\\Lab1\\Programm\\Programm.csproj",
+      "projectPath": "D:\\Learning\\4_sem_(2 course)\\OOP\\githubrep\\Lab1\\Programm\\Programm.csproj",
       "packagesPath": "C:\\Users\\genos\\.nuget\\packages\\",
-      "outputPath": "D:\\Learning\\4_sem_(2 course)\\OOP\\Lab1\\Programm\\obj\\",
+      "outputPath": "D:\\Learning\\4_sem_(2 course)\\OOP\\githubrep\\Lab1\\Programm\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\Programms\\Visual Studio\\programm\\components_instruments_SDK\\NuGetPackages"

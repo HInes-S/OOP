@@ -4,7 +4,10 @@
 	
 	Пользователь вводит команду draw <figure> <Name> <x> <y> <w> <h> <BorderColor> <BackgroundColor> <Layer>,
 	после чего на холсте рисуется фигура figure(эллипс(ellipse) или прямоугольник(rectangle))
-	с заданной позицией (x, y), размером(w, h), цветом границы(BorderColor, где цвет - это символ, пробел (space) или прозрачный (empty)), цветом фона(BackgroundColor), и слоем
+	с заданной позицией (x, y), размером(w, h), цветом границы(BorderColor, где цвет - это символ, пробел (space) или прозрачный (empty)), цветом фона(BackgroundColor), и слоем Layer
+
+	Пользователь вводит команду draw triangle <Name> <x1> <y1> <x2> <y2> <x3> <y3> <BorderColor> <BackgroundColor> <Layer>,
+	после чего на холсте рисуется фигура треугольник с углами в точках (x1, y1), (x2, y2), (x3, y3), цветом границы(BorderColor, где цвет - это символ, пробел (space) или прозрачный (empty)), цветом фона(BackgroundColor), и слоем Layer
 	
 - Очистка холста
 
