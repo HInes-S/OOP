@@ -604,7 +604,7 @@ namespace Droweroid
             }
 
             Console.SetCursorPosition(0, Console.WindowHeight - 1);
-            Console.Write(error + new string(' ', Console.WindowWidth - error.Length));
+            Console.Write(error/* + new string(' ', Console.WindowWidth - error.Length)*/);
             if (error != "")
                 Console.ReadKey(true);
 
