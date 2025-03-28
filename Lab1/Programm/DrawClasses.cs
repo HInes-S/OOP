@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Formats.Asn1;
 using System.Linq;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -123,6 +124,7 @@ namespace Droweroid
                     if (cnt == 2)
                     {
                         error = Canvas.Load(keyWords[1]);
+                        change = true;
                         break;
                     }
                     error = "Error: Wrong count of arguments";
@@ -212,7 +214,7 @@ namespace Droweroid
                                 break;
                         }
                     }
-                    else if (cnt == 12)
+                    else if (cnt == 11)
                     {
                         if (Canvas.Figures.Find(f => f != null && f.Name == keyWords[2]) != null)
                         {
@@ -226,54 +228,64 @@ namespace Droweroid
                             break;
                         }
 
-                        if (!int.TryParse(keyWords[3], out var tempX1) ||
-                            !int.TryParse(keyWords[4], out var tempY1) ||
-                            !int.TryParse(keyWords[5], out var tempX2) ||
-                            !int.TryParse(keyWords[6], out var tempY2) ||
-                            !int.TryParse(keyWords[7], out var tempX3) ||
-                            !int.TryParse(keyWords[8], out var tempY3))
+                        if (!int.TryParse(keyWords[3], out var tempX) ||
+                            !int.TryParse(keyWords[4], out var tempY))
                         {
                             error = "Error: Wrong Coordinates";
                             break;
                         }
-                        else if (tempX1 < 0 || tempY1 < 0 || tempX2 < 0 || tempY2 < 0 || tempX3 < 0 || tempY3 < 0)
+                        else if (tempX < 0 || tempY < 0)
                         {
                             error = "Error: Wrong Coordinates";
                             break;
                         }
 
+                        if (!int.TryParse(keyWords[5], out var tempA) ||
+                            !int.TryParse(keyWords[6], out var tempB) ||
+                            !int.TryParse(keyWords[7], out var tempC))
+                        {
+                            error = "Error: Wrong Sides";
+                            break;
+                        }
+                        else if (tempA < 1 || tempB < 1 || tempC < 1 ||
+                                 tempA + tempB <= tempC || tempB + tempC <= tempA || tempA + tempC <= tempB)
+                        {
+                            error = "Error: Wrong Sides";
+                            break;
+                        }
+
                         //border, background, layer
-                        if (!char.TryParse(keyWords[9], out var tempBorder) && keyWords[9] != "empty" && keyWords[9] != "space")
+                        if (!char.TryParse(keyWords[8], out var tempBorder) && keyWords[8] != "empty" && keyWords[8] != "space")
                         {
                             error = "Error: Wrong BorderColor";
                             break;
                         }
 
-                        if (!char.TryParse(keyWords[10], out var tempBackgound) && keyWords[10] != "empty" && keyWords[10] != "space")
+                        if (!char.TryParse(keyWords[9], out var tempBackgound) && keyWords[9] != "empty" && keyWords[9] != "space")
                         {
                             error = "Error: Wrong BackgroundColor";
                             break;
                         }
 
-                        if (!int.TryParse(keyWords[11], out var tempLayer))
+                        if (!int.TryParse(keyWords[10], out var tempLayer))
                         {
                             error = "Error: Wrong Layer";
                             break;
                         }
 
-                        if (keyWords[9] == "empty")
+                        if (keyWords[8] == "empty")
                             tempBorder = '\n';
-                        if (keyWords[10] == "empty")
+                        if (keyWords[9] == "empty")
                             tempBackgound = '\n';
-                        if (keyWords[9] == "space")
+                        if (keyWords[8] == "space")
                             tempBorder = ' ';
-                        if (keyWords[10] == "space")
+                        if (keyWords[9] == "space")
                             tempBackgound = ' ';
 
                         if (keyWords[1] == "triangle")
                         {
-                            Canvas.Figures.Add(new Triangle((tempX1, tempY1, tempX2, tempY2, tempX3, tempY3), 
-                                               tempBorder, tempBackgound, tempLayer, keyWords[2]));
+                            Canvas.Figures.Add(new Triangle(tempX, tempY, tempA, tempB, tempC,
+                                                tempBorder, tempBackgound, tempLayer, keyWords[2]));
                             Canvas.Update(Canvas.Figures);
                             change = true;
                         }
@@ -353,7 +365,7 @@ namespace Droweroid
                                             {
                                                 if (int.TryParse(keyWords[3], out var tempx) && int.TryParse(keyWords[4], out var tempy))
                                                 {
-                                                    if (tempx >= 0 && tempx + tempf.Width <= Canvas.Width &&
+                                                    /*if (tempx >= 0 && tempx + tempf.Width <= Canvas.Width &&
                                                        tempy >= 0 && tempy + tempf.Height <= Canvas.Height)
                                                     {
                                                         tempf.x = tempx;
@@ -363,7 +375,9 @@ namespace Droweroid
                                                     {
                                                         error = "Error: Wrong coordinates";
                                                         break;
-                                                    }
+                                                    }*/
+                                                    tempf.x = tempx;
+                                                    tempf.y = tempy;
                                                 }
                                                 else
                                                 {
@@ -432,7 +446,9 @@ namespace Droweroid
                                         case "size":
                                             if (cnt == 5)
                                             {
-                                                if (keyWords[2].GetType() == typeof(Triangle))
+                                                Figure tempff = Canvas.Figures.Find(f => f != null && f.Name == keyWords[1]);
+
+                                                if (tempff.GetType() == typeof(Triangle))
                                                 {
                                                     error = "Error: Can not change size of triangle";
                                                     break;
@@ -527,7 +543,7 @@ namespace Droweroid
                             case "draw":
                                 error = "draw elipse <Name> <x> <y> <w> <h> <BorderColor> <BackgroundColor> <Layer>\n" +
                                         "draw rect <Name> <x> <y> <w> <h> <BorderColor> <BackgroundColor> <Layer>\n" +
-                                        "draw triangle <Name> <x1> <y1> <x2> <y2> <x3> <y3> <BorderColor> <BackgroundColor> <Layer>";
+                                        "draw triangle <Name> <x> <y> <a> <b> <c> <BorderColor> <BackgroundColor> <Layer>";
                                 break;
 
                             case "clear":
@@ -983,6 +999,149 @@ namespace Droweroid
             Name = name;
         }
 
+        public Triangle(int x1, int y1, int a, int b, int c, char borderColor, char backgroundCOlor, int layer, string name)
+        {
+            BorderColor = borderColor;
+            BackgroundColor = backgroundCOlor;
+            Layer = layer;
+            Name = name;
+
+            var tempCircle2 = new Ellipse(0, 0, b * 2, b * 2, ' ', ' ', 0, "");
+            var tempCircle3 = new Ellipse(0, 0, c * 2, c * 2, ' ', ' ', 0, "");
+
+            var sideFull2 = tempCircle2.GetForm();
+            var sideFull3 = tempCircle3.GetForm();
+
+            var side2 = new int[b, b];
+            var side3 = new int[c, c];
+
+            for(int i = 0; i < b; i++)
+                for(int j = 0; j < b; j++)
+                    side2[i, j] = sideFull2[i + b, j];
+
+            for (int i = 0; i < c; i++)
+                for (int j = 0; j < c; j++)
+                    side3[i, j] = sideFull3[i + c, j + c];
+
+            (int, int) bPrevPnt, cPrevPnt, bPnt, cPnt, bNextPnt, cNextPnt;
+
+            //0.1 Пройти по левому циклу, найти единицу
+            bPnt = (0, 0); bPrevPnt = (0, 0);
+            //0.2 Пройти по правому циклу, найти единицу
+            cPnt = (0, c - 1); cPrevPnt = (0, c - 1);
+            //0.3 Обнулить начальные точки четвертей окружностей
+            side2[0, 0] = 0; side3[0, c - 1] = 0;
+
+            do
+            {
+                //0. Нужно убирать единицы проверенные
+                //1. Пройти по левому циклу, найти единицу
+
+                // Находим следующие точки
+                bNextPnt = MasFind(side2, 1, false);
+                cNextPnt = MasFind(side3, 1, true);
+
+                if(cNextPnt == (-1, -1) && bNextPnt == (-1, -1))
+                {
+                    break;
+                }
+
+                if (cNextPnt == (-1, -1))
+                    cNextPnt = cPnt;
+
+                if (bNextPnt == (-1, -1))
+                    bNextPnt = bPnt;
+
+                //Делаем проверку на расстояние
+                //1) л+1 и п
+                if (a * a >= Math.Pow(bNextPnt.Item2 - (cPnt.Item2 + b), 2) + Math.Pow(bNextPnt.Item1 - cPnt.Item1, 2))
+                {
+                    bPnt = bNextPnt;
+                    break;
+                }
+                //2) л и п+1
+                if (a * a >= Math.Pow(bPnt.Item2 - (cNextPnt.Item2 + b), 2) + Math.Pow(bPnt.Item1 - cNextPnt.Item1, 2))
+                {
+                    cPnt = cNextPnt;
+                    break;
+                }
+                //3) л+1 и п+1
+                if (a * a >= Math.Pow(bNextPnt.Item2 - (cNextPnt.Item2 + b), 2) + Math.Pow(bNextPnt.Item1 - cNextPnt.Item1, 2))
+                {
+                    cPnt = cNextPnt;
+                    bPnt = bNextPnt;
+                    break;
+                }
+                else
+                {
+                    bPrevPnt = bPnt;
+                    cPrevPnt = cPnt;
+                    bPnt = bNextPnt;
+                    cPnt = cNextPnt;
+                }
+
+                try
+                {
+                    side2[bNextPnt.Item1, bNextPnt.Item2] = 0;
+                    side3[cNextPnt.Item1, cNextPnt.Item2] = 0;
+                }
+                catch(Exception)
+                {
+                    throw new Exception("Triangle (-1, -1)");
+                }
+
+            } while (true);
+
+            //проверка на ДоТочки и Точки
+
+            if(Math.Abs(Math.Pow(bPrevPnt.Item2 - (cPrevPnt.Item2 + b), 2) + Math.Pow(bPrevPnt.Item1 - cPrevPnt.Item1, 2) - a * a) <
+               Math.Abs(Math.Pow(bPnt.Item2 - (cPnt.Item2 + b), 2) + Math.Pow(bPnt.Item1 - cPnt.Item1, 2) - a * a))
+            {
+                bPnt = bPrevPnt;
+                cPnt = cPrevPnt;
+            }
+
+            int x2 = x1 - b + bPnt.Item2,
+                y2 = y1 + bPnt.Item1,
+                x3 = x1 + cPnt.Item2,
+                y3 = y1 + cPnt.Item1;
+
+            var tempT = new Triangle((x1, y1, x2, y2, x3, y3), ' ', ' ', 0, "");
+
+            x = tempT.x;
+            y = tempT.y;
+            Width = tempT.Width;
+            Height = tempT.Height;
+            Cords = tempT.Cords;
+        }
+
+        public static (int, int) MasFind(int[,] mas, int q, bool reverse)
+        {
+            int h = mas.GetLength(0), w = mas.GetLength(1);
+
+            for(int i = 0; i < h; i++)
+            {
+                if (reverse)
+                {
+                    for (int j = w - 1; j >= 0; j--)
+                    {
+                        if (mas[i, j] == q)
+                            return (i, j);
+                    }
+                }
+                else
+                {
+                    for (int j = 0; j < w; j++)
+                    {
+                        if (mas[i, j] == q)
+                            return (i, j);
+                    }
+                }
+            }
+
+            return (-1, -1);
+        }
+
         public override Figure DeepClone()
         {
             return new Triangle
@@ -1052,8 +1211,8 @@ namespace Droweroid
             int x1 = Cords.Item1, x2 = Cords.Item3, x3 = Cords.Item5,
                 y1 = Cords.Item2, y2 = Cords.Item4, y3 = Cords.Item6;
 
-            if (x1 < 0 || x2 < 0 || x3 < 0 || y1 < 0 || y2 < 0 || y3 < 0)
-                throw new Exception("Triangle negative point coordinates");
+            /*if (x1 < 0 || x2 < 0 || x3 < 0 || y1 < 0 || y2 < 0 || y3 < 0)
+                throw new Exception("Triangle negative point coordinates");*/
 
             int minx = Math.Min(x1, Math.Min(x2, x3)), miny = Math.Min(y1, Math.Min(y2, y3));
 
@@ -1295,12 +1454,12 @@ namespace Droweroid
 
                 for (int i = 0; i < eh; i++)
                 {
-                    if (ey + i >= Height)
-                        break;
+                    if (ey + i >= Height || ey + i < 0)
+                        continue;
                     for (int j = 0; j < ew; j++)
                     {
-                        if (ex + j >= Width)
-                            break;
+                        if (ex + j >= Width || ex + j < 0)
+                            continue;
                         dx = j + ex; dy = i + ey;
                         if (image[j, i] == '\n')
                             continue;
